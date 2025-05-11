@@ -11,6 +11,10 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi {
 		this.ioconsole = new IOConsole(); // default
 	}
 
+	public FabbricaDiComandiFisarmonica(IO ioconsole2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public Comando costruisciComando(String istruzione) {
 		String nomeComando = null;

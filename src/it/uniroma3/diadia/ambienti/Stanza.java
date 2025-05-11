@@ -18,8 +18,8 @@ public class Stanza {
 	
 	private String nome;
 	
-    private Attrezzo[] attrezzi;
-    private int numeroAttrezzi;
+    protected Attrezzo[] attrezzi;
+    protected int numeroAttrezzi;
     
     private Stanza[] stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
@@ -102,7 +102,7 @@ public class Stanza {
      * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
-        if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
+        if (this.numeroAttrezzi < this.attrezzi.length) {
         	this.attrezzi[numeroAttrezzi] = attrezzo;
         	this.numeroAttrezzi++;
         	return true;

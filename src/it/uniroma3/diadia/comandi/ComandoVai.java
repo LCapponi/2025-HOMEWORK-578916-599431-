@@ -12,7 +12,7 @@ public class ComandoVai implements Comando {
 	public ComandoVai() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public void esegui(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();

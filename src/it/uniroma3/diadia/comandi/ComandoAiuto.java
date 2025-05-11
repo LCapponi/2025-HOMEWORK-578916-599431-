@@ -5,7 +5,7 @@ import it.uniroma3.diadiaa.IOConsole;
 
 public class ComandoAiuto implements Comando {
 	
-	private static final String[] elencoComandi={"Vai","prendi","posa","aiuto","fine"};
+	private static final String[] elencoComandi={"Vai","prendi","posa","aiuto","fine","guarda"};
 
 	private IO ioConsole;
 	
