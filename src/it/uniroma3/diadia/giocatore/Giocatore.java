@@ -1,59 +1,34 @@
 package it.uniroma3.diadia.giocatore;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadiaa.Configuratore;
 
 public class Giocatore {
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = Configuratore.getCFU();
+	//static final private int CFU_INIZIALI = 20;
+
 	private int cfu;
 	private Borsa borsa;
 
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
 		this.borsa = new Borsa();
-
 	}
 
 	public int getCfu() {
-		return cfu;
+		return this.cfu;
 	}
 
 	public void setCfu(int cfu) {
-		this.cfu = cfu;
-	}
-
-	public void togliUnCfu() {
-		this.cfu--;
-	}
-
-	public boolean hasZeroCfu() {
-		return this.cfu <= 0;
+		this.cfu = cfu;		
 	}
 
 	public Borsa getBorsa() {
-		return this.borsa;
+		return borsa;
 	}
 
-	public boolean addAttrezzo(Attrezzo attrezzo) {
-		return this.borsa.addAttrezzo(attrezzo);
-	}
-
-	public Attrezzo removeAttrezzo(String nomeattrezzo) {
-		return this.borsa.removeAttrezzo(nomeattrezzo);
-	}
-
-	public Attrezzo getAttrezzo(String nomeattrezzo) {
-		return this.borsa.getAttrezzo(nomeattrezzo);
-	}
-
-	public boolean hasAttrezzo(String nomeAttrezzo) {
-		return this.borsa.hasAttrezzo(nomeAttrezzo);
-	}
-
-	public String toString() {
-		StringBuilder s = new StringBuilder();
-		s.append("Giocatore con " + this.cfu + " cfu");
-		s.append("\n");
-		s.append(borsa);
-		return s.toString();
-	}
+	public void setBorsa(Borsa borsa) {
+		this.borsa = borsa;
+	}	
+	
+	
 }

@@ -1,54 +1,33 @@
 package it.uniroma3.diadia.comandi;
+
 import it.uniroma3.diadiaa.IO;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadiaa.IOConsole;
 import it.uniroma3.diadiaa.Partita;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando{
 
-	private String nomeAttrezzo;
-	private IO ioConsole;
-	
-	
+	private final static String NOME = "posa";
 
-	public ComandoPosa() {
-		// TODO Auto-generated constructor stub
-	}
 
+	@Override
 	public void esegui(Partita partita) {
-		if(nomeAttrezzo==null) {
-			ioConsole.mostraMessaggio("Quale Attrezzo vuoi posare");
+		Attrezzo a = partita.getGiocatore().getBorsa().getAttrezzo(this.getParametro());
+		if(a==null) {
+			this.getIo().mostraMessaggio("Attrezzo non presente nella borsa!");
 			return;
-			
 		}
-		Attrezzo attrezzo=null;
-		attrezzo=partita.getGiocatore().getAttrezzo(nomeAttrezzo);
-		
-		if (attrezzo == null) {
-	        ioConsole.mostraMessaggio("Non hai questo attrezzo nella borsa.");
-	        return;
-	}
-		   boolean aggiunto = partita.getStanzaCorrente().addAttrezzo(attrezzo);
-
-		    if (aggiunto) {
-		        partita.getGiocatore().removeAttrezzo(attrezzo.getNome());
-		        ioConsole.mostraMessaggio("Hai posato l'attrezzo: " + attrezzo.getNome());
-		    } else {
-		        ioConsole.mostraMessaggio("Non puoi posare l'attrezzo: stanza piena.");
-		    }
+		if(partita.getStanzaCorrente().getNumeroAttrezziPossibili()>0) {
+			partita.getLabirinto().getStanzaCorrente().addAttrezzo(a);
+			partita.getGiocatore().getBorsa().removeAttrezzo(this.getParametro());
 		}
-	
-	
-
-	@Override
-	public void setParametro(String parametro) {
-		 this.nomeAttrezzo = parametro;
-		
+		else {
+			this.getIo().mostraMessaggio("Non c'e' spazio nella stanza per poter inserire questo attrezzo!");
+		}
 	}
 
 	@Override
-	public void setIOConsole(IO ioconsole) {
-		 this.ioConsole = ioconsole;
-		
+	public String getNome() {
+		return NOME;
+
 	}
 }

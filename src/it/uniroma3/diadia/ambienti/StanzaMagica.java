@@ -2,11 +2,13 @@ package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+public class StanzaMagica extends Stanza {
 
-class StanzaMagica extends Stanza  {
-	final static private int SOGLIA_MAGICA_DEFAULT = 3;
 	private int contatoreAttrezziPosati;
+
 	private int sogliaMagica;
+
+	private static final int SOGLIA_MAGICA_DEFAULT = 1;
 
 	public StanzaMagica(String nome) {
 		this(nome, SOGLIA_MAGICA_DEFAULT);
@@ -18,27 +20,25 @@ class StanzaMagica extends Stanza  {
 		this.sogliaMagica = soglia;
 	}
 
-	@Override
-	public boolean addAttrezzo(Attrezzo attrezzo) {
-		this.contatoreAttrezziPosati++;
-		if (this.contatoreAttrezziPosati >SOGLIA_MAGICA_DEFAULT)
-			attrezzo = this.modificaAttrezzo(attrezzo);
-		
-		
-		if (this.numeroAttrezzi < this.attrezzi.length) {
-			this.attrezzi[this.numeroAttrezzi] = attrezzo;
-			this.numeroAttrezzi++;
-			return true;
-
-		} else
-			return false;
-
-	}
 
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
-		
-		String nomeInvertito = new StringBuilder(attrezzo.getNome()).reverse().toString();
-		int pesoRaddoppiato = attrezzo.getPeso() * 2;
-		return new Attrezzo(nomeInvertito, pesoRaddoppiato);
+		StringBuilder nomeInvertito;
+		int pesoX2 = attrezzo.getPeso() * 2;
+		nomeInvertito = new StringBuilder(attrezzo.getNome());
+		nomeInvertito = nomeInvertito.reverse();
+		attrezzo = new Attrezzo(nomeInvertito.toString(),
+				pesoX2);
+		return attrezzo;
 	}
+
+	@Override
+	public boolean addAttrezzo(Attrezzo attrezzo) {
+		if(this.contatoreAttrezziPosati>this.sogliaMagica) {
+			attrezzo = this.modificaAttrezzo(attrezzo);
+		}
+		this.contatoreAttrezziPosati++;
+
+		return super.addAttrezzo(attrezzo);
+	}
+
 }

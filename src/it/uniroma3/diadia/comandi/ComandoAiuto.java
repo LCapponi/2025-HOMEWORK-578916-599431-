@@ -1,31 +1,34 @@
 package it.uniroma3.diadia.comandi;
-import it.uniroma3.diadiaa.Partita;
+
 import it.uniroma3.diadiaa.IO;
-import it.uniroma3.diadiaa.IOConsole;
+import it.uniroma3.diadiaa.Partita;
+public class ComandoAiuto extends AbstractComando {
 
-public class ComandoAiuto implements Comando {
-	
-	private static final String[] elencoComandi={"Vai","prendi","posa","aiuto","fine","guarda"};
+    static final public String[] ELENCO_COMANDI = {"vai", "aiuto", "fine","prendi", "posa", "guarda","saluta","interagisci","regala"};
+    
+    private final static String NOME = "aiuto";
+    
+    private IO io;  // campo per tenere l'istanza di IO
 
-	private IO ioConsole;
-	
-	 @Override
-public void esegui(Partita partita  ) {
-		for(String coso:elencoComandi) {
-			ioConsole.mostraMessaggio(""+ coso);
-		}
-	     ioConsole.mostraMessaggio("");
-}
+    @Override
+    public void esegui(Partita partita) {
+        for(int i=0; i< ELENCO_COMANDI.length; i++) 
+            this.io.mostraMessaggio(ELENCO_COMANDI[i]+" ");
+        this.io.mostraMessaggio("");
+    }
 
-	@Override
-	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public String getNome() {
+        return NOME;
+    }
 
-	@Override
-	public void setIOConsole(IO ioconsole) {
-		  this.ioConsole = ioconsole;
-		
-	}
+    @Override
+    public void setIo(IO io) {
+        this.io = io;
+    }
+
+    @Override
+    public IO getIo() {
+        return this.io;
+    }
 }
